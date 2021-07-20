@@ -5,10 +5,22 @@ const PORT = 8000
 
 app.use(cors())
 
-let savage = {
-	age: 28,
-	BirthName: 'Shéyaa Bin Abraham-Joseph',
-	birthLocaion: 'London, England',
+let rappers = {
+	'21 savage': {
+		age: 28,
+		birthName: 'Shéyaa Bin Abraham-Joseph',
+		birthLocaion: 'London, England',
+	},
+	'chance the rapper': {
+		age: 27,
+		birthName: 'Chancelor Jonathan Bennett',
+		birthLocaion: 'Chicago, Illinois',
+	},
+	unknown: {
+		age: 28,
+		birthName: 'unknown',
+		birthLocaion: 'unknown',
+	},
 }
 
 // Set up to handle get request
@@ -16,8 +28,18 @@ app.get('/', (request, response) => {
 	response.sendFile(__dirname + '/index.html')
 })
 
-app.get('/api/savage', (request, response) => {
-	response.json(savage)
+// Use parameter to send a request a specific name --> :rapperName
+app.get('/api/rappers/:rapperName', (request, response) => {
+	const rapName = request.params.rapperName.toLowerCase()
+	console.log(rapName)
+	// If Rapper exsit
+	if (rappers[rapName]) {
+		response.json(rappers[rapName])
+	} else {
+		// If no Rappers
+		response.json(rappers['unknown'])
+	}
+	response.json(rappers[rapName])
 })
 // Listening on port 8000
 app.listen(PORT, () => {
