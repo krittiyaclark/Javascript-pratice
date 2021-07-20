@@ -43,7 +43,8 @@ app.get('/api/rappers/:rapperName', function (request, response) {
 
   response.json(rappers[rapName]);
 }); // Listening on port 8000
+// Use process.env.PORT for Heroku
 
-app.listen(PORT, function () {
+app.listen(process.env.PORT || PORT, function () {
   console.log("Server running on port ".concat(PORT));
 });

@@ -42,6 +42,7 @@ app.get('/api/rappers/:rapperName', (request, response) => {
 	response.json(rappers[rapName])
 })
 // Listening on port 8000
-app.listen(PORT, () => {
+// Use process.env.PORT for Heroku
+app.listen(process.env.PORT || PORT, () => {
 	console.log(`Server running on port ${PORT}`)
 })
